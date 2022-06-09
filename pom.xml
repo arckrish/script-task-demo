@@ -4,33 +4,39 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.demo</groupId>
   <artifactId>script-task-demo</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>kjar</packaging>
+  <version>2.0.0-SNAPSHOT</version>
   <name>script-task-demo</name>
   <description>script-task-demo</description>
+  <properties>
+    <version.com.thoughtworks.xstream>1.4.16</version.com.thoughtworks.xstream>
+    <version.org.kie>7.59.0.Final-redhat-00009</version.org.kie>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-api</artifactId>
-      <version>7.52.0.Final-redhat-00007</version>
+      <version>${version.org.kie}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-internal</artifactId>
-      <version>7.52.0.Final-redhat-00007</version>
+      <version>${version.org.kie}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.optaplanner</groupId>
       <artifactId>optaplanner-core</artifactId>
-      <version>7.52.0.Final-redhat-00007</version>
+      <version>${version.org.kie}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.optaplanner</groupId>
       <artifactId>optaplanner-persistence-jaxb</artifactId>
-      <version>7.52.0.Final-redhat-00007</version>
+      <version>${version.org.kie}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -42,7 +48,7 @@
     <dependency>
       <groupId>com.thoughtworks.xstream</groupId>
       <artifactId>xstream</artifactId>
-      <version>1.4.16.redhat-00001</version>
+      <version>1.4.16</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -51,9 +57,80 @@
       <plugin>
         <groupId>org.kie</groupId>
         <artifactId>kie-maven-plugin</artifactId>
-        <version>7.52.0.Final-redhat-00007</version>
+        <version>${version.org.kie}</version>
         <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
       </plugin>
     </plugins>
   </build>
+ <!-- repositories -->
+ <repositories>
+  <repository>
+    <releases>
+      <enabled>true</enabled>
+    </releases>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+    <id>redhat-ga-repository</id>
+    <url>https://maven.repository.redhat.com/ga/</url>
+  </repository>
+  <repository>
+    <id>central</id>
+    <name>Central Repository</name>
+    <url>https://repo.maven.apache.org/maven2</url>
+    <layout>default</layout>
+    <snapshots>
+       <enabled>false</enabled>
+    </snapshots>
+  </repository>
+</repositories>
+<pluginRepositories>
+  <pluginRepository>
+    <releases>
+      <enabled>true</enabled>
+    </releases>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+    <id>redhat-ga-repository</id>
+    <url>https://maven.repository.redhat.com/ga/</url>
+  </pluginRepository>
+  <pluginRepository>
+    <id>central</id>
+    <name>Central Repository</name>
+    <url>https://repo.maven.apache.org/maven2</url>
+    <layout>default</layout>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+    <releases>
+      <updatePolicy>never</updatePolicy>
+    </releases>
+  </pluginRepository>
+</pluginRepositories>
+<distributionManagement>
+  <snapshotRepository>
+    <id>redhat-ga-repository</id>
+    <url>https://maven.repository.redhat.com/ga/</url>
+  </snapshotRepository>
+  <repository>
+<id>redhat-ga-repository</id>
+    <url>https://maven.repository.redhat.com/ga/</url>
+</repository>
+</distributionManagement>  
 </project>
